@@ -2,6 +2,7 @@ new Vue({
     el: '#app',
     data: {
         event: {
+            eventHeading: 'Guest List',
             eventDate: 'August 14th - 16th',
             eventTitle: 'Summer Festival!',
             eventTitle2: 'v text output',
