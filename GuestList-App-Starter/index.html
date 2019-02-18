@@ -10,20 +10,21 @@
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
+    
+  <div class="container">
+    <div id="navigation" >
+        <div class="row">
+            <div class="col-sm-12 text-center">
+              <h1>{{ appName }}</h1>
+            </div> 
+        </div>
+    </div>
 
-  <div id="app">
-    <div class="container">
-
-      <div class="row" :style="appStyles">
-        <div class="col-sm-12 text-center">
-          <h1>{{ event.eventHeading }}</h1>
-        </div> 
-      </div>
-
-      <div class="row" :style="appStyles">
+    <div id="app">
+      <div class="row">
         <div class="col-sm-12">
           <div class="card">
-            <div class="card-header" :class="formSubmitClass">
+            <div class="card-header">
               {{ event.eventDate }}
             </div>
             <div class="card-block">
@@ -32,8 +33,8 @@
               <p class="card-text" v-html="event.signUpText"></p>
 
               <form class="form-inline" @submit.prevent="formSubmitted">
-                <input type="text" id="nameInput" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Your Name" v-model="newNameText">
-                <input type="submit" :class="formSubmitClass" class="btn btn-primary"></input>
+                <input type="text" id="nameInput" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Your Name" v-model="newNameText" @keyup.enter="keyPressed">
+                <input type="submit" class="btn btn-primary"></input>
               </form>
               {{ newNameText }}
 
@@ -42,25 +43,38 @@
         </div>
       </div>
 
-      <div class="row" :style="appStyles">
+      <div class="row">
         <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
-              Attending ({{ guestName.length }})
+              Attending ({{ guestName.length }} / {{ eventCapacity }} )
+              <br>
+
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+                  :style="{ width: eventCapacityPercent + '%' }" aria-valuemin="0" aria-valuemax="100">
+                  {{ eventCapacityPercent }}%
+                </div>
+              </div>
+
             </div>
             <div class="card-block">
               <div v-if="guestName.length > 0">
                 <div class="card-success rounded name-box" 
-                  v-for="name in guestName">
-                    {{ name.toLowerCase()}} <strong>{{'is attending'}}</strong>
+                  v-for="(name, index) in sortNames" :key="name">
+                    {{ name | formatName }} <strong>({{ index +1 }})</strong>
                 </div>
               </div>
               <div v-else>
                 <h4>No names added yet...</h4>
               </div>
+              
+              <div class="text-right">
+                <h5>{{ limitText }}</h5>
+              </div>
+
             </div>
           </div>
-
         </div>
       </div>
     </div>
