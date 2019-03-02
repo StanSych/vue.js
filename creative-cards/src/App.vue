@@ -5,10 +5,10 @@
       <div class="col-sm-12">
         <!-- NAV -->
         <nav-header @pageWasChanged="currentPage = $event"></nav-header>
-        <!-- / -->
-        
-        <!-- CARD FRONT -->
-        <component v-bind:is="currentPage"></component>
+        <!-- CURRENT (SELECTED) CARD -->
+        <keep-alive>
+          <component v-bind:is="currentPage"></component>
+        </keep-alive>
         <!-- / -->
       </div>
     </div>

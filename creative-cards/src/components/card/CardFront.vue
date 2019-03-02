@@ -2,10 +2,14 @@
 <template>
     <div class="row">
         <div class="col-sm-6 card edit-area">
-            <cc-text-input></cc-text-input>
+            <cc-text-input @displayTextChanged="textBoxValue1 = $event"></cc-text-input>
+            <cc-text-input @displayTextChanged="textBoxValue2 = $event"></cc-text-input>
+            <cc-text-input @displayTextChanged="textBoxValue3 = $event"></cc-text-input>
         </div>
         <div class="col-sm-6 card card-display">
-
+            <cc-text-output :displayText="textBoxValue1" :containerHeight="130"></cc-text-output>
+            <cc-text-output :displayText="textBoxValue2" :containerHeight="130"></cc-text-output>
+            <cc-text-output :displayText="textBoxValue3" :containerHeight="130"></cc-text-output>
         </div>
     </div>
 </template>
@@ -13,16 +17,25 @@
 //JS
 <script>
     import TextInput from './TextInput.vue'
+    import TextOutput from './TextOutput.vue'
 
     export default {
+        data: function() {
+            return {
+                textBoxValue1: '',
+                textBoxValue2: '',
+                textBoxValue3: ''
+            }
+        },
         components: {
-            ccTextInput: TextInput
+            ccTextInput: TextInput,
+            ccTextOutput: TextOutput
         }
     }
 </script>
 
 //STYLES
-<style lang="scss">
+<style lang="scss">//add [scoped] to restict styles for this template only
     .edit-area{
         background-color: #d2f9f9;
         padding: 20px;
