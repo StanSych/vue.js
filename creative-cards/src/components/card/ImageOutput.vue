@@ -1,14 +1,15 @@
 //STRUCTURE
 import { functions } from 'firebase';
 <template>
-    <div class="img-container" :style="styleObject">
-       <img src="" id="outputImage" alt="">{{ displayImage }}
+    <div class="img-container" :style="styleObject" @mouseover="showOptions = true" @mouseleave="showOptions = false">
+        <button type="button" class="btn btn-outline-danger btn-sm" @click="clearImageProp" v-show="showOptions">Remove Image</button>
+        <img src="" id="outputImage" alt="">{{ displayImage }}
     </div>
 </template>
 
 //JS
 <script>
-    import Firebase from 'firebase'
+    import Firebase, { functions } from 'firebase'
 
     export default {
         props: {
@@ -18,6 +19,12 @@ import { functions } from 'firebase';
             containerHeight: {
                 type: Number,
                 default: 200
+            },
+            clearImageProp: Function
+        },
+        data: function () {
+            return {
+                showOptions: false
             }
         },
         watch: {
@@ -26,6 +33,7 @@ import { functions } from 'firebase';
                 storageRef.getDownloadURL().then(function(url) {
                     var img = document.getElementById('outputImage')
                     img.src = url
+                    setDraggable();
                 })
             }
         },
@@ -37,6 +45,10 @@ import { functions } from 'firebase';
             }
        }
     }
+
+    function setDraggable() {
+        $('#outputImage').draggable();
+    }
 </script>
 
 //STYLES
@@ -45,5 +57,14 @@ import { functions } from 'firebase';
         border: 1px dotted #ccc;
         overflow: hidden;
         margin: 5px 0;
+    }
+
+    button {
+        position: absolute;
+        z-index: 1;
+    }
+
+    img {
+        width: 130%;
     }
 </style>

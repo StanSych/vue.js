@@ -89,7 +89,6 @@
        font-family: 'Playfair Display', serif;
        font-size: 42px;
        line-height: 42px;
-       text-shadow: 2px 2px 2px #aaa;
        color: #4d4d4d;
        margin: 5px 0;
        border: 1px dotted grey;
@@ -101,14 +100,13 @@
        font-weight: bold;
    }
 
-
     .italic {
         font-style: italic;
     }
 
     form {
         position: absolute;
-        border-bottom: 1px dotter grey;
+        border-bottom: 1px dotted grey;
         margin-top: 10px;
         margin-bottom: 5px;
         padding-bottom: 5px;
@@ -116,6 +114,8 @@
 
     select {
         height: 40%;
+        width: auto;
+        margin-bottom: 5px;
     }
 
 </style>
