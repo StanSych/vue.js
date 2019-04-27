@@ -8,11 +8,15 @@
             <li class="nav-item"><a @click="pageSelected='cardInsideRight'" class="nav-link">Inside Right</a></li>
             <li class="nav-item"><a @click="pageSelected='cardBack'" class="nav-link">Back</a></li>
         </ul>
+        <hr>
+        <cc-card-progress></cc-card-progress>
     </div>
 </template>
 
 //JS
 <script>
+import CardProgress from './card/CardProgress.vue'
+
     export default {
         data: function() {
             return {
@@ -23,6 +27,9 @@
             pageSelected: function() {
                 this.$emit('pageWasChanged', this.pageSelected)
             }
+        },
+        components: {
+            ccCardProgress: CardProgress
         }
     }
 </script>
