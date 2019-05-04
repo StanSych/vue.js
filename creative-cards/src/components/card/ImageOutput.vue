@@ -2,7 +2,13 @@
 import { functions } from 'firebase';
 <template>
     <div class="img-container" :style="styleObject" @mouseover="showOptions = true" @mouseleave="showOptions = false">
-        <button type="button" class="btn btn-outline-danger btn-sm" @click="clearImageProp" v-show="showOptions">Remove Image</button>
+
+        <transition 
+        enter-active-class="custom-enter-active"
+        leave-active-class="custom-leave-active">
+            <button type="button" class="btn btn-outline-danger btn-sm" @click="clearImageProp" v-show="showOptions">Remove Image</button>
+        </transition>
+
         <img src="" id="outputImage" alt="">{{ displayImage }}
     </div>
 </template>
