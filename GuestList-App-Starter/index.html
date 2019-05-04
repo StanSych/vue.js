@@ -43,7 +43,8 @@
               <p class="card-text" v-html="event.signUpText"></p>
 
               <form class="form-inline" @submit.prevent="formSubmitted">
-                <input type="text" id="nameInput" class="form-control mb-2 mr-sm-2 mb-sm-0" placeholder="Your Name" v-model="newNameText" @keyup.enter="keyPressed">
+                <input type="text" id="nameInput" class="form-control mb-2 mr-sm-2 mb-sm-0" 
+                placeholder="Your Name" v-model="newNameText" @keyup.enter="keyPressed">
                 <input type="submit" class="btn btn-primary"></input>
               </form>
               {{ newNameText }}
@@ -66,24 +67,27 @@
                   {{ eventCapacityPercent }}%
                 </div>
               </div>
-
             </div>
+
             <div class="card-block">
-              <div v-if="guestName.length > 0">
-                <div class="card-success rounded name-box" 
+
+                <transition-group :name="effect1" tag="p">
+                  <div class="card-success rounded name-box" 
                   v-for="(name, index) in sortNames" :key="name">
-                    {{ name | formatName }} <strong>({{ index +1 }})</strong>
+                      {{ name | formatName }} <strong>({{ index +1 }})</strong>
+                  </div>
+                </transition-group>
+                
+                <div v-if="guestName.length === 0" key="names">
+                  <h4>No names added yet...</h4>
                 </div>
-              </div>
-              <div v-else>
-                <h4>No names added yet...</h4>
-              </div>
               
               <div class="text-right">
                 <h5>{{ limitText }}</h5>
               </div>
 
-            </div>
+          </div>
+
           </div>
         </div>
       </div>

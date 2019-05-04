@@ -13,7 +13,8 @@ var vm1 = new Vue({
         limitText: '',
         guestName: [],
         eventCapacity: 25,
-        eventCapacityPercent: 0
+        eventCapacityPercent: 0,
+        effect1: "scale"
     },
     methods:{
         formSubmitted: function() {
